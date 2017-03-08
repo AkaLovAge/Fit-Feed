@@ -101,7 +101,7 @@
   	<div class ="w3-card-2 w3-light-grey w3-display-middle w3-opacity-min" style="width:60%">
 
   		<h3 class="w3-display-topmiddle">Registeration</h3>
-  		<form action = "register.php" method="post" class="w3-display-middle">
+  		<form action = "register.php" method="post">
   			Username:<input type="text" name="username"><br></br>
   			Password:<input type="text" name="password"><br></br>
   			Repassword:<input type="text" name="repassword"><br></br>
