@@ -5,12 +5,12 @@
 		$dbpassword="fitfeed123";
 		$database_name="fitfeed123_FITFEED";
 		$conn = mysqli_connect($server_name,$user_name, $dbpassword,$database_name);
-		$errors = array();
+		$error = array();
 		if (mysqli_connect_error()){
 	    		die("Database Connection Failed" . mysqli_connect_error());
 		}
+		if ((! empty($_POST['username']))&& (!empty($_POST['password']))){
 		
-		if (isset($_POST['username'])&&isset($_POST['password'])){
 			$fitfeed_user_name = mysqli_real_escape_string($conn, $_POST['username']);
 			$passwordinput = mysqli_real_escape_string($conn,$_POST['password']);
 			$result = $conn->query("SELECT * FROM user where username = '$fitfeed_user_name'");
@@ -19,11 +19,16 @@
 				while ($row = $result->fetch_assoc()){
 					$user=$row['username'];
 					$userpass = $row['password'];
+					$usertype = $row['type'];
 				}
-				//echo "<script type='text/javascript'>alert('$userpass');</script>";
+				//echo "<script type='text/javascript'>alert('$usertype');</script>";
 				if($userpass == $passwordinput){
 					$_SESSION['user']=$user;
-					header('Location: welcome.php');
+					if ($usertype == 'R'){
+						header ('Location: welcomeR.php');
+					}else{
+						header ('Location:profile.php');
+					}
 					exit;
 				}else{
 					$error['authorirty']="password is not correct";
@@ -70,37 +75,61 @@
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding-8 w3-card-2">
-    <a href="#home" class="w3-bar-item w3-button w3-margin-left">Fit Feed</a>
+    <a href="index.php" class="w3-bar-item w3-button w3-margin-left">Fit Feed</a>
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <a href="#about" class="w3-bar-item w3-button">About</a>
-      <a href="#menu" class="w3-bar-item w3-button">Menu</a>
-      <a href='#contact' class="w3-bar-item w3-button">Contact</a>
-      <a href='LogIn.php' class="w3-bar-item w3-button" ></a>
-      <a href='register.php' class="w3-bar-item-button"></a>
     </div>
   </div>
 </div>
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-  <img class="w3-image" src="http://g02.a.alicdn.com/kf/HTB1vOgAIpXXXXXraXXXq6xXFXXXb/Miranda-kerr-modeli-kuma%C5%9F-poster-40-x-24-21-x-13--005.jpg" alt="Hamburger Catering" width="1600" height="800">
+  <img class="w3-image" src="http://www.culinarynutrition.com/wp-content/uploads/2014/09/o-ORGANIC-FOODS-facebook.jpg" alt="Hamburger Catering" width="1600" height="800">
 
+  
   <div class="register-form">
-  	<div class ="w3-card-2 w3-light-grey w3-display-middle w3-opacity-min" style="width:60%">
-
-  		<h3 class="w3-display-topmiddle">Log In</h3>
+  
+  	<div class ="w3-card-2 w3-light-grey w3-display-middle w3-opacity-min" style="margin-left:40px;width:70%;height:47%">
+  	<img class="img-log" style="border-radius: 60%;float:right; margin-top:90px" src="source/img/login_fit.png">
+  	    <div style="margin-left:10px">
+  		<p class="display-topleft">Log In to FitFeed<p>
+  		<p class="display-topleft"> New to FitFeed? <a href='register.php'> Sign Up</a><p> 
+  		<div style="width: 30%; height: 0.5px; border-bottom: 1px solid black; text-align: center; margin-bottom: 10px;"></div>
   		<form action = "LogIn.php" method="post">
-  			Username:<input type="text" name="username"><br></br>
-  			Password:<input type="text" name="password"><br></br>
-  			<input type="submit"name="submit" value="Login">
-  			<p id = "register_error"></p>
+  			<input type="text" style="width: 30%;" id = "username" name="username" value = "<?php echo 'username'; ?>" placeholder = "username"
+      				style="background-color:white; 
+             			border: solid 1px #6E6E6E;
+              			height: 30px; 
+              			font-size:18px; 
+              			vertical-align:9px;color:#bbb" 
+        			onfocus="if(this.value == 'username') {
+             			this.value = '';
+                  		this.style.color='#000';
+                		}"><br></br>
+  			<input type="password" style="width: 30%;" id = "password" name='password' value = "<?php echo 'password'; ?>" placeholder = "password"
+      				style="background-color:white; 
+             			border: solid 1px #6E6E6E;
+              			height: 30px; 
+              			font-size:18px; 
+              			vertical-align:9px;color:#bbb" 
+        			onfocus="if(this.value == 'password') {
+             			this.value = '';
+                  		this.style.color='#000';
+                		}"><br></br>
+                	
+                		<p>  </p>
+                	<p>  </p>
+            <input type="submit"name="submit" value="LogIn" style="width:30%">
+  			<p class="display-topleft"> New to FitFeed? <a href='register.php'> Sign Up</a><p>
+  			    <p>  </p>
+  			<p id = "register_error">
   			<?php echo show_error($error);?>
   		</p>
   		</form>
+  	     </div>
   	</div>
   </div>
-  
+
 <!-- End page content -->
 </div>
 

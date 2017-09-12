@@ -20,11 +20,12 @@
 //			die('Can not connect to Database' . mysql_error());
 //		}
 		
-		if (isset($_POST['username'])&&isset($_POST['password'])&&isset($_POST['repassword'])){
+		if ((!empty($_POST['username']))&&(!empty($_POST['password']))&&(!empty($_POST['repassword']))){
 		
 			$fitfeed_user_name = mysqli_real_escape_string($conn, trim($_POST['username']));
 			$passwordinput = mysqli_real_escape_string($conn, trim($_POST['password']));
 			$repasswordinput = mysqli_real_escape_string($conn, trim ($_POST['repassword']));
+			$usertype = $_POST['type'];
 			$username_select = $conn->query("SELECT * FROM user where username = {$fitfeed_user_name}");
 			$row_num = $username_select->num_rows;
 			
@@ -35,10 +36,11 @@
 				$error['repassword']="the password is not match";
 			}
 			if (empty($error)){
-				$insert_sql = "INSERT INTO user (username,password) VALUES ('$fitfeed_user_name','$passwordinput')";
+				$insert_sql = "INSERT INTO user (username,password,type) VALUES ('$fitfeed_user_name','$passwordinput','$usertype')";
 				$user_insert = $conn->query($insert_sql);
 				if ($user_insert){
 					$msg="User Create!";
+					header('Location: profile.php');
 				}else{
 					die("Can not insert your username to database!" . mysqli_error($conn));
 				}
@@ -62,7 +64,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register</title>
+    <title>FitFFeed-Register</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
@@ -84,41 +86,87 @@
     <a href="#home" class="w3-bar-item w3-button w3-margin-left">Fit Feed</a>
     <!-- Right-sided navbar links. Hide them on small screens -->
     <div class="w3-right w3-hide-small">
-      <a href="#about" class="w3-bar-item w3-button">About</a>
-      <a href="#menu" class="w3-bar-item w3-button">Menu</a>
-      <a href='#contact' class="w3-bar-item w3-button">Contact</a>
-      <a href='LogIn.php' class="w3-bar-item w3-button" ></a>
-      <a href='register.php' class="w3-bar-item-button"></a>
+      <a href="LogIn.php" class="w3-bar-item w3-button">Log In</a>
     </div>
   </div>
 </div>
 
 <!-- Header -->
 <header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-  <img class="w3-image" src="http://g02.a.alicdn.com/kf/HTB1vOgAIpXXXXXraXXXq6xXFXXXb/Miranda-kerr-modeli-kuma%C5%9F-poster-40-x-24-21-x-13--005.jpg" alt="Hamburger Catering" width="1600" height="800">
+  <img class="w3-image" src="http://www.culinarynutrition.com/wp-content/uploads/2014/09/o-ORGANIC-FOODS-facebook.jpg" alt="Hamburger Catering" width="1600" height="800">
 
-  <div class="register-form">
-  	<div class ="w3-card-2 w3-light-grey w3-display-middle w3-opacity-min" style="width:60%">
-
-  		<h3 class="w3-display-topmiddle">Registeration</h3>
+  
+<div class="register-form">
+  <div class ="w3-card-2 w3-light-grey w3-display-middle w3-opacity-min" style="margin-left:40px;width:70%;height:50%">
+  	<img class="img-log" style="border-radius: 60%;float:right; margin-top:90px" src="source/img/login_fit.png">
+  	    <div style="margin-left:10px">
+  		<p class="display-topleft">Sign up for Fit Feed</p>
+  		<p class="display-topleft"> Find the best way to keep fit</p>
   		<form action = "register.php" method="post">
-  			Username:<input type="text" name="username"><br></br>
-  			Password:<input type="text" name="password"><br></br>
-  			Repassword:<input type="text" name="repassword"><br></br>
+  			<input type="text" id = "username" name="username" style="width: 30%;"  value = "<?php echo 'username'; ?>" placeholder = "username"
+      				style="background-color:white; 
+             			border: solid 1px #6E6E6E;
+              			height: 30px; 
+              			font-size:18px; 
+              			vertical-align:9px;color:#bbb" 
+        			onfocus="if(this.value == 'username') {
+             			this.value = '';
+                  		this.style.color='#000';
+                		}"><br></br>
+  			<input type="password" id = "repassword" name="password" style="width: 30%;"  value = "<?php echo 'password'; ?>" placeholder = "password"
+                    echo 'password:';
+$oldStyle = shell_exec('stty -g');
+shell_exec('stty cbreak -echo');
+$passwd = "";
+while(true) {
+ $c = fgetc(STDIN);
+ if ($c != PHP_EOL) {
+     $passwd .= $c;
+ } else {
+     break;
+ }
+ echo "*";
+}
+echo shell_exec('stty ' . $oldStyle);
+echo PHP_EOL . "password ".$passwd;
+      				style="background-color:white; 
+             			border: solid 1px #6E6E6E;
+              			height: 30px; 
+              			font-size:18px; 
+              			vertical-align:9px;color:#bbb" 
+        			onfocus="if(this.value == 'password') {
+             			this.value = '';
+                  		this.style.color='#000';
+                		}"><br></br>
+  			<input type="password" id = "retype password" name="repassword" style="width: 30%;"  value = "<?php echo 'password'; ?>" placeholder = "retype password"
+      				style="background-color:white; 
+             			border: solid 1px #6E6E6E;
+              			height: 30px; 
+              			font-size:18px; 
+              			vertical-align:9px;color:#bbb" 
+        			onfocus="if(this.value == 'password') {
+             			this.value = '';
+                  		this.style.color='#000';
+                		}"><br></br>
+                	
+                	<input type="radio" name="type" value="C" checked> customer  or
+  			<input type="radio" name="type" value="R"> restaurant<br>
+
   			<input type="submit"name="submit" value="REGIST">
   			<p id = "register_error"></p>
   			<?php echo show_error($error);?>
   		</p>
   		</form>
-  	</div>
+  	   </div>
   </div>
+</div>
   
 <!-- End page content -->
 </div>
 
 <!-- Footer -->
 <footer class="w3-center w3-light-grey w3-padding-8">
-  <p>Powered by Pei Liu, Yuting Yang, Chujie Qin, Xu Li<a href="https://wiki.illinois.edu/wiki/display/cs411sp17/Team+9" title="Wiki Page" target="_blank" class="w3-hover-text-green"><br></br>Wiki Page</a></p>
+  <p>Powered by Pei Liu, Yuting Yang, Chujie Qin, Xu Li<a href="https://wiki.illinois.edu/wiki/display/cs411sp17/Team+9" title="Wiki Page" target="_blank" class="w3-hover-text-green">  Wiki Page</a></p>
 </footer>
 
 </body>

@@ -18,6 +18,7 @@
     <script src="JQuery/jquery-3.1.1.min.js">
     </script>
     <script type="text/javascript">
+        console.log(document.domain);
     	$(document).ready(function($){
 	    var User = "<?php echo $_SESSION['name'];?>";
 	    if (!User){
@@ -34,6 +35,8 @@
 	});
      </script>
 </head>
+
+
 <body>
 
 <!-- Navbar (sit on top) -->
@@ -52,11 +55,9 @@
 </div>
 
 <!-- Header -->
-<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
-  <img class="w3-image" src="http://g02.a.alicdn.com/kf/HTB1vOgAIpXXXXXraXXXq6xXFXXXb/Miranda-kerr-modeli-kuma%C5%9F-poster-40-x-24-21-x-13--005.jpg" alt="Hamburger Catering" width="1600" height="800">
-  <div class="w3-display-bottomleft w3-padding-xlarge w3-light-grey w3-opacity">
-    <h1 class="w3-xxlarge">Fit Feed</h1>
-  </div>
+<header class="w3-display-container w3-content w3-wide" style="max-width:50000px;min-width:500px" id="home">
+  <?php include 'test.php';?>
+
 </header>
 
 
@@ -67,15 +68,13 @@
   <!-- About Section -->
   <div class="w3-row w3-padding-64" id="about">
     <div class="w3-col m6 w3-padding-large w3-hide-small">
-     <img src="http://g01.a.alicdn.com/kf/HTB1CSHTJFXXXXXOXVXXq6xXFXXXQ/-font-b-Gigi-b-font-Hadid-Hot-Sexy-Bikini-Swimsuit-Girl-Super-Model-Art-Silk.jpg
-" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
+     <img src="https://www.ipha.com/content/uploads/contributor/food2.jpg" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
     </div>
 
     <div class="w3-col m6 w3-padding-large">
-      <h1 class="w3-center">About Catering</h1><br>
-      <h5 class="w3-center">Tradition since 1889</h5>
-      <p class="w3-large">The Catering was founded in blabla by Mr. Smith in lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute iruredolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.We only use <span class="w3-tag w3-light-grey">seasonal</span> ingredients.</p>
-      <p class="w3-large w3-text-grey w3-hide-medium">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod temporincididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h1 class="w3-center">About Fitfeed</h1><br>
+      <h5 class="w3-center">A Healthy Food Recommendation Platform </h5>
+      <p class="w3-large w3-text-grey w3-hide-medium" >Our platform recommends healthy food choices based on calories and nutrition facts. It also serves as a buy/sell platform of homemade healthy food at lower prices(no intermediate costs), in which users can search for food, order food, sell food and receive recommendation of the intake calories per day as well as fitness facts at one place. </p>
     </div>
   </div>
   
@@ -84,25 +83,21 @@
   <!-- Menu Section -->
   <div class="w3-row w3-padding-64" id="menu">
     <div class="w3-col l6 w3-padding-large">
-      <h1 class="w3-center">Our Menu</h1><br>
-      <h4>Bread Basket</h4>
-      <p class="w3-text-grey">Assortment of fresh baked fruit breads and muffins 5.50</p><br>
+      <h1>Restaurant Menu</h1><br>
+      <h4>Original Pancake House</h4>
+      <p class="w3-text-grey">Weight Watchers Barbacoa Beef</p><br>
     
-      <h4>Honey Almond Granola with Fruits</h4>
-      <p class="w3-text-grey">Natural cereal of honey toasted oats, raisins, almonds and dates 7.00</p><br>
+      <h4>Caribbean Grill Food Truck</h4>
+      <p class="w3-text-grey">Southern Chicken and Corn Chowder</p><br>
     
-      <h4>Belgian Waffle</h4>
-      <p class="w3-text-grey">Vanilla flavored batter with malted flour 7.50</p><br>
+      <h4>Miga</h4>
+      <p class="w3-text-grey">Slow Cooker Busy Day Stew</p><br>
     
-      <h4>Scrambled eggs</h4>
-      <p class="w3-text-grey">Scrambled eggs, roasted red pepper and garlic, with green onions 7.50</p><br>
-    
-      <h4>Blueberry Pancakes</h4>
-      <p class="w3-text-grey">With syrup, butter and lots of berries 8.50</p>    
+   
     </div>
     
     <div class="w3-col l6 w3-padding-large">
-      <img src="https://pbs.twimg.com/profile_images/1289557304/image002-2_400x400.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" width="500" height="750">
+      <img src="https://media-cdn.tripadvisor.com/media/photo-s/03/4c/ab/dd/natures-health-food-cafe.jpg" class="w3-round w3-image w3-opacity-min" alt="Menu" width="500" height="750">
     </div>
   </div>
 
@@ -111,18 +106,17 @@
   <!-- Contact Section -->
   <div class="w3-container w3-padding-64" id="contact">
     <h1>Contact</h1><br>
-    <p>We offer full-service catering for any event, large or small. We understand your needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste. Do not hesitate to contact us.</p>
-    <p class="w3-text-blue-grey w3-large"><b>Catering Service, 42nd Living St, 43043 New York, NY</b></p>
-    <p>You can also contact us by phone 00553123-2323 or email catering@catering.com, or you can send us a message here:</p>
+    <p>This is a web application for food recommendation and odering</p>
+    <p class="w3-text-blue-grey w3-large"><b>University of Illinois at Urbana-Champaign, Champaign, IL</b></p>
+    <p>You can also contact us by phone 555-273-2545 or email fitfeed123@fitfeed.com, or you can send us a message here:</p>
     <form action="/action_page.php" target="_blank">
       <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
       <p><input class="w3-input w3-padding-16" type="number" placeholder="How many people" required name="People"></p>
       <p><input class="w3-input w3-padding-16" type="datetime-local" placeholder="Date and time" required name="date" value="2017-11-16T20:00"></p>
       <p><input class="w3-input w3-padding-16" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
-      <p><button class="w3-button w3-section" type="submit">SEND MESSAGE</button></p>
+      <p><button class="w3-button w3-light-grey w3-section" type="submit">SEND MESSAGE</button></p>
     </form>
   </div>
-  
 <!-- End page content -->
 </div>
 
@@ -132,3 +126,4 @@
 </footer>
 
 </body>
+</html>
